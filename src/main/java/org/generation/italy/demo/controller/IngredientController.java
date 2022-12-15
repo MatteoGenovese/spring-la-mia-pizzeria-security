@@ -7,7 +7,6 @@ import org.generation.italy.demo.pojo.Pizza;
 import org.generation.italy.demo.pojo.Ingredient;
 import org.generation.italy.demo.service.IngredientService;
 import org.generation.italy.demo.service.PizzaService;
-import org.generation.italy.demo.service.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

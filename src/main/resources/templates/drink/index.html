@@ -27,11 +27,20 @@
 		The list is empty
 	</div>
 	
-	<a href="/drinks/create"> Create new drink for the menu</a>
+
+	
+	<a 	th:href="@{/drinks/admin/create}"
+		sec:authorize="hasAuthority('ADMIN')"> 
+		Create a new drink for the menu
+	</a>
 	<br>
 	<a href="/drinks/search">Search Drink</a>
 	<br>
 	<a href="/"> Home</a>
+	
+		<br>
+Logged user: <span sec:authentication="name">Bob</span>
+Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
 
 </body>
 </html>

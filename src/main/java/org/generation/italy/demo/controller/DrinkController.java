@@ -48,7 +48,7 @@ public class DrinkController {
 	}
 	
 	
-	@GetMapping("/create")
+	@GetMapping("admin/create")
 	public String createDrink( Model model)
 	{
 
@@ -62,7 +62,7 @@ public class DrinkController {
 		return "drink/form";
 	}
 	
-	@PostMapping("/create")
+	@PostMapping("admin/create")
 	public String storeDrink(@Valid @ModelAttribute("drink") Drink drink, Error e, BindingResult bindingResult, RedirectAttributes redirectAttributes)
 	{
 		if (bindingResult.hasErrors()) {
@@ -80,7 +80,7 @@ public class DrinkController {
 		return "redirect:/drinks";
 	}
 	
-	@GetMapping("/edit/{id}")
+	@GetMapping("admin/edit/{id}")
 	public String editDrink(@PathVariable("id") int id, Model model)
 	{
 
@@ -98,7 +98,7 @@ public class DrinkController {
 		return "drink/form";
 	}
 	
-	@PostMapping("/edit")
+	@PostMapping("admin/edit")
 	public String updateDrink(@Valid @ModelAttribute("drink") Drink drink, BindingResult bindingResult, RedirectAttributes redirectAttributes)
 	{
 		if (bindingResult.hasErrors()) {
@@ -116,7 +116,7 @@ public class DrinkController {
 		return "redirect:/drinks";
 	}
 	
-	@GetMapping("/delete/{id}")
+	@GetMapping("admin/delete/{id}")
 	public String deleteBook(@PathVariable("id") int id) {
 		
 		drinkService.delete(id);

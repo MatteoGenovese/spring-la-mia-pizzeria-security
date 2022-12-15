@@ -1,18 +1,23 @@
 package org.generation.italy.demo;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.generation.italy.demo.pojo.Drink;
 import org.generation.italy.demo.pojo.Ingredient;
 import org.generation.italy.demo.pojo.Pizza;
 import org.generation.italy.demo.pojo.Promoting;
+import org.generation.italy.demo.pojo.Role;
+import org.generation.italy.demo.pojo.User;
 import org.generation.italy.demo.service.DrinkService;
 import org.generation.italy.demo.service.IngredientService;
 import org.generation.italy.demo.service.PizzaService;
 import org.generation.italy.demo.service.PromotingService;
+import org.generation.italy.demo.service.RoleServ;
+import org.generation.italy.demo.service.UserServ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -33,6 +38,12 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
 	@Autowired
 	private IngredientService ingredientService;
 	
+	@Autowired
+	private RoleServ roleServ;
+	
+	@Autowired
+	private UserServ userServ;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(SpringLaMiaPizzeriaCrudApplication.class, args);
 	}
@@ -40,6 +51,25 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) throws Exception {
+		
+		Role userRole = new Role("USER");
+		Role adminRole = new Role("ADMIN");
+		
+		roleServ.save(userRole);
+		roleServ.save(adminRole);
+		
+		User userUser = new User("user", "{noop}userpws", userRole);
+		User adminUser = new User("admin", "{noop}adminpws", adminRole);
+		
+		Set<Role> userAdminRoles = new HashSet<>();
+		userAdminRoles.add(userRole);
+		userAdminRoles.add(adminRole);
+		User userAdminUser = new User("useradmin", "{noop}useradminpws", userAdminRoles);
+		
+		userServ.save(userUser);
+		userServ.save(adminUser);
+		userServ.save(userAdminUser);
+		
 		
 		Promoting pro1 = new Promoting("promozione estiva", LocalDate.now(), LocalDate.now());
 		Promoting pro2 = new Promoting("promozione natalizia", LocalDate.now(), LocalDate.now());
