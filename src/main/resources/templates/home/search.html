@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body 	>
+
+	<form th:object="${query}">
+		<label>Name: </label>
+		<input type="text" name="q" th:value="${query}">
+		<br><br>
+		<input type="submit" value="SEARCH">
+	</form>
+	
+	<div th:object="${drinkList}" th:if="${drinkList.size} != 0">
+		<h1>Drinks</h1>
+		<ul>
+			<li
+				th:each ="drink : ${drinkList}"
+				th:object="${drink}">
+				
+				<a th:href="@{ /drinks/{id} (id=*{id})}">
+					[[*{name}]] 
+				</a>
+				<br>
+				 	[[*{description}]] - [[*{price}]] euro
+			</li>
+		</ul>
+	</div>
+	
+	<div th:object="${pizzaList}" th:if="${pizzaList.size} != 0">
+		<h1>Pizza</h1>
+		<ul>
+
+			<li
+				th:each ="pizza : ${pizzaList}"
+				th:object="${pizza}">
+					<a th:href="@{ /pizza/{id} (id=*{id})}">
+						[[*{name}]] 
+					</a>
+					<br>
+					 	[[*{description}]] - [[*{price}]] euro
+			</li>
+		</ul>
+	</div>
+	
+	<div th:if="${pizzaList.size} == 0 AND ${drinkList.size} == 0">
+		<h1>No results</h1>
+	</div>
+
+</body>
+</html>

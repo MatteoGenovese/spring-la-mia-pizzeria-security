@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body 	th:object="${pizza}"		>
+
+	<h1>[[${h1text}]]</h1>
+
+	<form 
+		method="POST"
+		th:action="@{/pizza/{type}  (type=${type})}"
+		>
+		
+		<input type="text" name="name" th:field="*{id}" style="display:none;">
+
+	
+		<label>name</label>
+		<input type="text" name="name" th:field="*{name}">
+		<br>
+		
+		<label>description</label>
+		<input type="text" name="description" th:field="*{description}">
+		<br>
+		
+		<label>price</label>
+		<input type="number" name="price" th:field="*{price}">
+		<br>
+		
+
+			<select name="promoting" >
+			
+				<option th:value="null" th:field="${pizza.promoting}">NO PROMO
+				</option>
+				
+				
+				<option th:each="promoting : ${promotingList}" th:object="${promoting}" th:value="*{id}" th:field="${pizza.promoting}">[[*{title}]]
+				</option>
+			
+			</select>
+			
+			<label>Ingredients:</label>
+					<div
+			th:each="ingredient : ${ingredientList}"
+			th:object="${ingredient}"
+		>
+			<input 
+				type="checkbox" 
+				name="ingredientList" 
+				
+				th:value="*{id}" 
+				th:field="${pizza.ingredientList}">
+			<label>[[*{name}]]</label>
+		</div>
+			
+
+		
+		
+		
+		<input type="submit" th:value="${type}">
+	
+	</form>
+	
+	<a href="/pizza">Home</a>
+				<br>		
+			<br>
+	<div th:if="${errors}">
+		ERROR: 
+		<ul>
+			<li	th:each="error: ${errors}"
+				th:object="${error}">
+	
+							[[*{defaultMessage}]]
+			</li>
+		</ul>
+	</div>
+
+</body>
+</html>

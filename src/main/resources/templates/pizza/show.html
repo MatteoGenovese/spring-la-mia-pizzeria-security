@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body th:object="${pizza}">
+
+	<h1>
+		[[*{name}]]
+	</h1>
+	
+	
+	<ul>
+		<li>
+			id: [[*{id}]]
+		</li>
+		<li>
+			description: [[*{description}]]
+		</li>
+		<li>
+			price: [[*{price}]]
+		</li>
+	</ul>
+	
+	<a th:href="@{/pizza/edit/{id} (id=*{id})}">edit</a>
+	
+	<a th:href="@{/pizza/delete/{id} (id=*{id})}">delete</a>
+	
+		<a href="/pizza">Home</a>
+
+</body>
+</html>

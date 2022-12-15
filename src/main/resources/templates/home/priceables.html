@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body >
+
+	<h1>Priceables</h1>
+	
+	<ul>
+		<li
+			th:each ="priceable : ${priceables}"
+			th:object="${priceable}"
+			>
+			<a th:href="@{ /drinks/{id} (id=*{id})}">
+				[[*{name}]] 
+			</a>
+			<br>
+			 [[*{description}]] - [[*{price}]] euro
+		</li>
+	</ul>
+	
+	
+	
+	<div th:if ="${priceables.size == 0}">
+		The list is empty
+	</div>
+	
+	<a href="/drinks/create"> Create new drink for the menu</a>
+	<br>
+	<a href="/drinks/search">Search Drink</a>
+	<br>
+	<a href="/"> Home</a>
+
+</body>
+</html>

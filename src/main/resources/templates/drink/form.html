@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body 	th:object="${drink}"		>
+
+	<h1>[[${h1text}]]</h1>
+
+	<form 
+		method="POST"
+		th:action="@{/drinks/{type}  (type=${type})}"
+		>
+		
+		<input type="text" name="name" th:field="*{id}" style="display:none;">
+
+	
+		<label>name</label>
+		<input type="text" name="name" th:field="*{name}">
+		<br>
+		
+		<label>description</label>
+		<input type="text" name="description" th:field="*{description}">
+		<br>
+		
+		<label>price</label>
+		<input type="number" name="price" th:field="*{price}">
+		<br>
+		
+		<input type="submit" th:value="${type}">
+	
+	</form>
+	
+	<a href="/drinks">Home</a>
+			<br>		
+			<br>
+	<div th:if="${errors}">
+		ERROR: 
+		<ul>
+			<li		th:each="error: ${errors}"
+						th:object="${error}">
+	
+							[[*{defaultMessage}]]
+			</li>
+		</ul>
+	</div>
+
+</body>
+</html>

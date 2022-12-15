@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body th:object="${ingredientList}">
+
+	<form th:object="${query}">
+		<label>Name: </label>
+		<input type="text" name="q" th:value="${query}">
+		<br><br>
+		<input type="submit" value="SEARCH">
+	</form>
+	
+	<ul>
+		<li
+			th:each ="ingredient : ${ingredientList}"
+			th:object="${ingredient}"
+			>
+			<a th:href="@{ /ingredients/{id} (id=*{id})}">
+				[[*{name}]] 
+			</a>
+			<br>
+		</li>
+	</ul>
+	<div th:if="${ingredientList.size} == 0">
+		<h1>No results</h1>
+
+	</div>
+	
+</body>
+</html>
